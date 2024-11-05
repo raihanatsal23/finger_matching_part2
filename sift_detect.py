@@ -4,15 +4,13 @@ import glob
 import os
 
 # Minimum match count to consider a valid match
-MIN_MATCH_COUNT = 5
+MIN_MATCH_COUNT = 15
 
 # Path to the directory with thinned images
 output_dir = "./output/"
 
 # Load the input image to find feature points
-input_img = cv.imread(
-    "./output/102/102_1_thinned.png"
-)  # Replace with the correct path if needed
+input_img = cv.imread("./output/3/012_3_1_thinned.png")
 input_img = input_img.astype("uint8")
 gray = cv.cvtColor(input_img, cv.COLOR_BGR2GRAY)
 sift = cv.xfeatures2d.SIFT_create()
@@ -67,9 +65,9 @@ for sub_dir in os.listdir(output_dir):
                 flags=2,
             )
             img3 = cv.drawMatches(input_img, kp1, frame, kp2, good, None, **draw_params)
-            # cv.imshow("Match", img3)
-            # cv.waitKey(0)
-            # cv.destroyAllWindows()
+            cv.imshow("Result", img3)
+            cv.waitKey(0)
+            cv.destroyAllWindows()
 
 # Check if any matches were found
 if flag == 0:
